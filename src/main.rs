@@ -38,9 +38,6 @@ fn resize_img(
     // if let
     println!("Final Dimensions: {} X {}", dims[0], dims[1]);
 
-    // if batch {
-    //     println!("Batch")
-    // }
     // Resize the image
     let resized_img = resize::resize_image(&img, dims[0], dims[1]);
 
@@ -58,22 +55,29 @@ fn main() {
     // Open an image file
 
     let matches = command!()
-        .arg(arg!(-i --input <FILE>))
-        .arg(arg!(-o --output <FILE>).required(false))
+        .arg(arg!(-i --input <FILE>).help("Input file/directory"))
+        .arg(
+            arg!(-o --output <FILE>)
+                .required(false)
+                .help("Output file/directory"),
+        )
         .arg(
             arg!(-H --height <VALUE>)
                 .value_parser(value_parser!(u32))
-                .required(false),
+                .required(false)
+                .help("Height"),
         )
         .arg(
             arg!(-W --width <VALUE>)
                 .value_parser(value_parser!(u32))
-                .required(false),
+                .required(false)
+                .help("Width"),
         )
         .arg(
             arg!(-p --percentage <VALUE>)
                 .value_parser(value_parser!(u32))
-                .required(false),
+                .required(false)
+                .help("Percentage"),
         )
         .get_matches();
 
